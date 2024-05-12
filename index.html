@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <title>life-game</title>
+</head>
+<body>
+<div class="tile">
+<!--    <canvas id="gameCanvas" width="400" height="400"></canvas>-->
+<!--  <button onclick="restartGame()">Restart</button>-->
+<!--  <script>-->
+<!--    const canvas = document.getElementById('gameCanvas');-->
+<!--    const ctx = canvas.getContext('2d');-->
+<!--    const cellSize = 10;-->
+<!--    const rows = canvas.height / cellSize;-->
+<!--    const cols = canvas.width / cellSize;-->
+<!--    let grid = createGrid();-->
+
+<!--    function createGrid() {-->
+<!--      const grid = [];-->
+<!--      for (let row = 0; row < rows; row++) {-->
+<!--        grid[row] = [];-->
+<!--        for (let col = 0; col < cols; col++) {-->
+<!--          grid[row][col] = Math.random() > 0.6 ? 1 : 0;-->
+<!--        }-->
+<!--      }-->
+<!--      return grid;-->
+<!--    }-->
+
+<!--    function drawGrid() {-->
+<!--      ctx.clearRect(0, 0, canvas.width, canvas.height);-->
+<!--      for (let row = 0; row < rows; row++) {-->
+<!--        for (let col = 0; col < cols; col++) {-->
+<!--          ctx.beginPath();-->
+<!--          ctx.rect(col * cellSize, row * cellSize, cellSize, cellSize);-->
+<!--          ctx.fillStyle = grid[row][col] ? 'black' : 'white';-->
+<!--          ctx.fill();-->
+<!--          ctx.stroke();-->
+<!--        }-->
+<!--      }-->
+<!--    }-->
+
+<!--    function restartGame() {-->
+<!--      grid = createGrid();-->
+<!--      drawGrid();-->
+<!--    }-->
+
+<!--    function updateGrid() {-->
+<!--      const newGrid = [];-->
+<!--      for (let row = 0; row < rows; row++) {-->
+<!--        newGrid[row] = [];-->
+<!--        for (let col = 0; col < cols; col++) {-->
+<!--          const neighbors = countNeighbors(row, col);-->
+<!--          if (grid[row][col] === 1) {-->
+<!--            newGrid[row][col] = neighbors === 2 || neighbors === 3 ? 1 : 0;-->
+<!--          } else {-->
+<!--            newGrid[row][col] = neighbors === 3 ? 1 : 0;-->
+<!--          }-->
+<!--        }-->
+<!--      }-->
+<!--      grid = newGrid;-->
+<!--    }-->
+
+<!--    function countNeighbors(row, col) {-->
+<!--      let count = 0;-->
+<!--      for (let i = -1; i < 2; i++) {-->
+<!--        for (let j = -1; j < 2; j++) {-->
+<!--          const newRow = row + i;-->
+<!--          const newCol = col + j;-->
+<!--          if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {-->
+<!--            count += grid[newRow][newCol];-->
+<!--          }-->
+<!--        }-->
+<!--      }-->
+<!--      count -= grid[row][col];-->
+<!--      return count;-->
+<!--    }-->
+
+<!--    function gameLoop() {-->
+<!--      updateGrid();-->
+<!--      drawGrid();-->
+<!--      requestAnimationFrame(gameLoop);-->
+<!--    }-->
+
+<!--    gameLoop();-->
+<!--  </script>-->
+</div>
+<div class="bady">
+<h1 class="cc">Игровой автомат - игра жизни</h1>
+    <h1>Что это такое?</h1>
+
+<p>Игра «Жизнь» (англ. Game of Life) — клеточный автомат, придуманный английским математиком Джоном Конвеем в 1970 году. Это игра без игроков, в которой генерируется начальное состояние, а человек потом лишь наблюдает за развитием коллонии которая сгенерировалась. В игре можно создать процессы с полнотой по Тьюрингу, что позволяет реализовать любую машину Тьюринга.</p>
+<h1>История создания</h1>
+<p>Джон Конвей ещё в детстве заинтересовался проблемой, предложенной в 1940-х годах известным математиком Джоном фон Нейманом, который пытался создать гипотетическую машину, способную воспроизводить себя. Джону фон Нейману удалось создать математическую модель такой машины с довольно сложными правилами — в автомате фон Неймана ячейка может иметь одно из 29-ти состояний, которые эти правила описывают. Конвей поставил целью придумать как можно более простой клеточный автомат с нетривиальным поведением, надеясь, что в таком случае он будет тьюринг-полным. Команда энтузиастов (Конвей, его коллеги и студенты) занималась перебором бесчисленных вариаций правил в поисках подходящих. Итогом стал набор из двух правил для клеток с двумя состояниями, получивших известность как игра «Жизнь». В 1970 году в письме к Мартину Гарднеру Конвей изложил правила и основные сведения о получившейся системе, которые удалось быстро выяснить. Гарднер изложил это в своей колонке о математических играх в журнале Scientific American. Игра «Жизнь» быстро получила тысячи поклонников по всей Америке и за её пределами, а её изобретатель приобрёл известность среди широкой публики.
+
+Вскоре Конвей доказал тьюринг-полноту игры «Жизнь» (доказательство не было опубликовано). После этого он практически потерял интерес к данной теме.
+
+Конвей был недоволен тем, насколько игра «Жизнь» более известна, чем другие его работы, и не слишком любил о ней рассказывать — кроме как отдельным интересующимся детям.</p>
+<h1>История реализации</h1>
+<p>В компьютерных реализациях игры поле ограничено и, как правило, замкнуто — верхняя граница поля «соединена» с нижней, а левая граница — с правой, что представляет собой эмуляцию поверхности тора, но на экране поле всегда отображается в виде равномерной сетки.
+
+Простейший алгоритм «смены поколения» последовательно просматривает все клетки решётки, для каждой подсчитывает соседей, определяя судьбу клетки в новом поколении (не изменится, умрёт, родится). Такой алгоритм использует два двумерных массива — для текущего и для следующего поколений.
+
+Более быстрый алгоритм делает первый проход по всем клеткам, но при этом составляет список клеток для просмотра в последующем поколении. Клетки, которые через поколение принципиально не могут измениться, в список не вносятся. Например, если какая-либо клетка и все её соседи не изменились при текущем обсчёте нового поколения, то эта клетка не изменится и при следующем проходе.</p>
+<h1>Пример релаизации игры «Жизнь»</h1>
+    <div class="button">
+    <canvas id="gameCanvas" width="780" height="400"></canvas>
+    </div>
+    <div class="button">
+  <button onclick="restartGame()">Restart</button>
+</div>
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const cellSize = 10;
+    const rows = canvas.height / cellSize;
+    const cols = canvas.width / cellSize;
+    let grid = createGrid();
+
+    function createGrid() {
+      const grid = [];
+      for (let row = 0; row < rows; row++) {
+        grid[row] = [];
+        for (let col = 0; col < cols; col++) {
+          grid[row][col] = Math.random() > 0.6 ? 1 : 0;
+        }
+      }
+      return grid;
+    }
+
+    function drawGrid() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          ctx.beginPath();
+          ctx.rect(col * cellSize, row * cellSize, cellSize, cellSize);
+          ctx.fillStyle = grid[row][col] ? 'black' : 'white';
+          ctx.fill();
+          ctx.stroke();
+        }
+      }
+    }
+
+    function restartGame() {
+      grid = createGrid();
+      drawGrid();
+    }
+
+    function updateGrid() {
+      const newGrid = [];
+      for (let row = 0; row < rows; row++) {
+        newGrid[row] = [];
+        for (let col = 0; col < cols; col++) {
+          const neighbors = countNeighbors(row, col);
+          if (grid[row][col] === 1) {
+            newGrid[row][col] = neighbors === 2 || neighbors === 3 ? 1 : 0;
+          } else {
+            newGrid[row][col] = neighbors === 3 ? 1 : 0;
+          }
+        }
+      }
+      grid = newGrid;
+    }
+
+    function countNeighbors(row, col) {
+      let count = 0;
+      for (let i = -1; i < 2; i++) {
+        for (let j = -1; j < 2; j++) {
+          const newRow = row + i;
+          const newCol = col + j;
+          if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+            count += grid[newRow][newCol];
+          }
+        }
+      }
+      count -= grid[row][col];
+      return count;
+    }
+
+    function gameLoop() {
+      updateGrid();
+      drawGrid();
+      requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+  </script>
+
+</div></body>
+</html>
